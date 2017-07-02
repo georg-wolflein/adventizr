@@ -1,0 +1,15 @@
+.jumbotron-fullscreen {
+  min-height: calc(100vh - 54px);
+}
+
+.page-header {
+  margin-top: 3rem;
+}
+
+.btn-advent {
+  @include button-variant($btn-advent-color, $btn-advent-bg, $btn-advent-border);
+}
+
+.btn-outline-advent {
+  @include button-outline-variant($btn-advent-bg);
+}

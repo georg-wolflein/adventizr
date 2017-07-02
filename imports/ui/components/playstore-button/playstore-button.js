@@ -1,0 +1,1 @@
+import './playstore-button.html';
