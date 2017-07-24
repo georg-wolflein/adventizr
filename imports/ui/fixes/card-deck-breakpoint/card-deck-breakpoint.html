@@ -1,0 +1,14 @@
+<template name="cardDeckBreakpoint">
+  {{#if divisible index 2}}
+    <div class="w-100 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
+  {{/if}}
+  {{#if divisible index 3}}
+    <div class="w-100 hidden-sm-down hidden-lg-up"><!-- wrap every 3 on md--></div>
+  {{/if}}
+  {{#if divisible index 4}}
+    <div class="w-100 hidden-md-down hidden-xl-up"><!-- wrap every 4 on lg--></div>
+  {{/if}}
+  {{#if divisible index 5}}
+    <div class="w-100 hidden-lg-down"><!-- wrap every 5 on xl--></div>
+  {{/if}}
+</template>

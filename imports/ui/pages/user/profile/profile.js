@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import './profile.html';
 
 import '/imports/ui/components/calendar-card/calendar-card.js';
+import '/imports/ui/fixes/card-deck-breakpoint/card-deck-breakpoint.js';
 
 Template.user_profile.onCreated(function() {
   Meteor.subscribe('calendars.all');

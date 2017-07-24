@@ -17,3 +17,6 @@ import '/imports/ui/components/playstore-button/playstore-button.js'
 // Routing
 import './routes.js';
 
+// Helpers
+import './helpers.js';
+

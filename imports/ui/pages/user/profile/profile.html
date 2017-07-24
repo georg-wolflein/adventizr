@@ -11,6 +11,8 @@
     <div class="card-deck">
       {{#each mycalendars}}
         {{> calendarCard}}
+
+        {{> cardDeckBreakpoint index=@index}}
       {{/each}}
     </div>
   </div>
