@@ -5,11 +5,11 @@ import './profile.html';
 
 import '/imports/ui/components/calendar-card/calendar-card.js';
 
-Template.app_profile.onCreated(function() {
+Template.user_profile.onCreated(function() {
   Meteor.subscribe('calendars.all');
 });
 
-Template.app_profile.helpers({
+Template.user_profile.helpers({
   mycalendars() {
     return Calendars.find({'user': Meteor.userId()});
   },

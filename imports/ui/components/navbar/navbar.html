@@ -4,11 +4,11 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="container">
-      <a class="navbar-brand" href="#">adventizr.</a>
+      <a class="navbar-brand" href="{{pathFor 'app.home'}}">adventizr.</a>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/">home</a>
+            <a class="nav-link" href="{{pathFor 'app.home'}}">home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#features">features</a>
@@ -17,14 +17,14 @@
         <ul class="navbar-nav">
           {{#if currentUser}}
             <li class="nav-item">
-              <a class="nav-link" href="/profile">profile</a>
+              <a class="nav-link" href="{{pathFor 'user.profile'}}">profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link logout" href="">logout</a>
             </li>
           {{else}}
             <li class="nav-item">
-              <a class="nav-link" href="/login">login</a>
+              <a class="nav-link" href="{{pathFor 'app.login'}}">login</a>
             </li>
           {{/if}}
         </ul>

@@ -1,8 +1,8 @@
 import { Calendars } from '/imports/api/calendars/calendars.js';
 import { Meteor } from 'meteor/meteor';
-import './calendars-create.html';
+import './create.html';
 
-Template.app_calendars_create.events({
+Template.user_create.events({
   'submit'(event) {
     event.preventDefault();
     
