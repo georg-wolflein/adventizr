@@ -25,3 +25,4 @@ fourseven:scss
 seba:minifiers-autoprefixer
 accounts-password
 arillo:flow-router-helpers
+momentjs:moment
