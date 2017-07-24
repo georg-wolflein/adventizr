@@ -24,3 +24,4 @@ johanbrook:publication-collector  # Test a Meteor publication by collecting its 
 fourseven:scss
 seba:minifiers-autoprefixer
 accounts-password
+arillo:flow-router-helpers
