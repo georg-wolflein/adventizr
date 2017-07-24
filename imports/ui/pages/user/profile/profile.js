@@ -6,7 +6,7 @@ import './profile.html';
 import '/imports/ui/components/calendar-card/calendar-card.js';
 import '/imports/ui/fixes/card-deck-breakpoint/card-deck-breakpoint.js';
 
-Template.user_profile.onCreated(function() {
+Template.user_profile.onCreated(() => {
   Meteor.subscribe('calendars.all');
 });
 
