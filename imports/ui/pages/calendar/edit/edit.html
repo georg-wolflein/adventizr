@@ -1,16 +1,73 @@
 <template name="calendar_edit">
   <div class="container">
     {{#with calendar}}
-      <div class="page-header d-flex">
-        <div>
-          <h1>edit {{title}}</h1>
+      <div class="page-header">
+        <h1>edit {{title}}</h1>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div id="accordion" role="tablist" aria-multiselectable="true">
+
+            <div class="card">
+              <div class="card-header" role="tab" id="headingEditCalendar">
+                <h5 class="mb-0">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseEditCalendar" aria-expanded="true" aria-controls="collapseEditCalendar">
+                    Edit calendar
+                  </a>
+                </h5>
+              </div>
+              <div id="collapseEditCalendar" class="collapse" role="tabpanel" aria-labelledby="headingEditCalendar">
+                <div class="card-block">
+                  <form id="calendarInfoForm">
+                    <div class="form-group">
+                      <label for="calendarTitle">Title</label>
+                      <input type="text" name="title" class="form-control" id="calendarTitle" placeholder="Enter a title" value="{{title}}">
+                    </div>
+                    <div class="form-group">
+                      <label for="calendarDescription">Description</label>
+                      <textarea name="description" class="form-control" id="calendarDescription" placeholder="Enter a description" value="{{description}}"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-advent btn-block">Update title &amp; description</button>
+                  </form>
+                  <hr>
+                  <form id="calendarBackgroundForm">
+                    <div class="form-group">
+                      <label for="calendarBackground">Background</label>
+                      <input type="file" name="background" class="form-control" id="calendarBackground" placeholder="Upload an image">
+                    </div>
+                    <button type="submit" class="btn btn-advent btn-block">Change background</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header" role="tab" id="headingEditDoor">
+                <h5 class="mb-0">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseEditDoor" aria-expanded="true" aria-controls="collapseEditDoor">
+                    Edit door
+                  </a>
+                </h5>
+              </div>
+              <div id="collapseEditDoor" class="collapse show" role="tabpanel" aria-labelledby="headingEditDoor">
+                <div class="card-block">
+                  jo
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
-        <div class="ml-auto">
-          {{#if user=currentUser._id}}
-            <a href="{{pathFor 'calendar.edit.info' _id=_id}}" class="btn btn-advent">edit info</a>
-          {{/if}}
+
+
+        <div class="col-md-8">
+          <div class="card">
+
+          </div>
         </div>
       </div>
+
     {{/with}}
   </div>
 </template>

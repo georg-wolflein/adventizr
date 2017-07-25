@@ -15,7 +15,6 @@ import '/imports/ui/pages/user/create/create.js';
 //Calendar
 import '/imports/ui/pages/calendar/view/view.js';
 import '/imports/ui/pages/calendar/edit/edit.js';
-import '/imports/ui/pages/calendar/edit-info/edit-info.js';
 
 // Set up all routes in the app
 
@@ -86,12 +85,5 @@ calendarSection.route('/:_id/edit', {
   name: 'calendar.edit',
   action() {
     BlazeLayout.render('app_body', { main: 'calendar_edit' });
-  },
-});
-
-calendarSection.route('/:_id/edit/info', {
-  name: 'calendar.edit.info',
-  action() {
-    BlazeLayout.render('app_body', { main: 'calendar_edit_info' });
   },
 });

@@ -26,3 +26,5 @@ seba:minifiers-autoprefixer
 accounts-password
 arillo:flow-router-helpers
 momentjs:moment
+cfs:standard-packages
+cfs:filesystem

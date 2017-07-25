@@ -12,3 +12,11 @@ Template.calendar_edit.helpers({
     return Calendars.findOne(id);
   }
 });
+
+Template.calendar_edit.events({
+  'submit'(event) {
+    event.preventDefault();
+    Meteor.call('calendars.update', FlowRouter.getParam("_id"), event.target.title.value, event.target.description.value);
+    // TODO: display success alert
+  }
+});
