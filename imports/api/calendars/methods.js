@@ -13,7 +13,21 @@ Meteor.methods({
       title,
       description,
       'user': Meteor.userId(),
-      createdAt: new Date(),
+      created: new Date(),
+      updated: new Date()
     });
   },
+  'calendars.update'(_id, title, description) {
+    check(_id, String);
+    check(title, String);
+    check(description, String);
+
+    return Calendars.update(_id, {
+      $set: {
+        title,
+        description,
+        updated: new Date()
+      }
+    });
+  }
 });

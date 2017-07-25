@@ -10,11 +10,11 @@ Template.user_create.events({
     const title = target.title;
     const description = target.description;
 
-    Meteor.call('calendars.insert', title.value, description.value, (error) => {
+    Meteor.call('calendars.insert', title.value, description.value, (error, result) => {
       if (error) {
         alert("an error occured");
       } else {
-        
+        FlowRouter.go('calendar.edit', { _id: result });
       }
     });
   }
