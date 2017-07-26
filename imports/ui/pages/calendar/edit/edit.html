@@ -30,14 +30,21 @@
                     </div>
                     <button type="submit" class="btn btn-advent btn-block">Update title &amp; description</button>
                   </form>
-                  <hr>
-                  <form id="calendarBackgroundForm">
-                    <div class="form-group">
-                      <label for="calendarBackground">Background</label>
-                      <input type="file" name="background" class="form-control" id="calendarBackground" placeholder="Upload an image">
-                    </div>
-                    <button type="submit" class="btn btn-advent btn-block">Change background</button>
-                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header" role="tab" id="headingEditBackground">
+                <h5 class="mb-0">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseEditBackground" aria-expanded="true" aria-controls="collapseEditBackground">
+                    Edit background
+                  </a>
+                </h5>
+              </div>
+              <div id="collapseEditBackground" class="collapse" role="tabpanel" aria-labelledby="headingEditBackground">
+                <div class="card-block">
+                  {{> calendar_edit_background_form}}
                 </div>
               </div>
             </div>
@@ -63,7 +70,7 @@
 
         <div class="col-md-8">
           <div class="card">
-
+            
           </div>
         </div>
       </div>

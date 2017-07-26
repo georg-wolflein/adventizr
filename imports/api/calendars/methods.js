@@ -17,7 +17,7 @@ Meteor.methods({
       updated: new Date()
     });
   },
-  'calendars.update'(_id, title, description) {
+  'calendars.update.info'(_id, title, description) {
     check(_id, String);
     check(title, String);
     check(description, String);
@@ -26,6 +26,16 @@ Meteor.methods({
       $set: {
         title,
         description,
+        updated: new Date()
+      }
+    });
+  },
+  'calendars.update.background'(_id, background) {
+    check(_id, String);
+
+    return Calendars.update(_id, {
+      $set: {
+        background,
         updated: new Date()
       }
     });

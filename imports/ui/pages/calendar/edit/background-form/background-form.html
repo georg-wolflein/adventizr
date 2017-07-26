@@ -1,0 +1,14 @@
+<template name="calendar_edit_background_form">
+  <form id="calendarBackgroundForm">
+    <div class="form-group">
+      <label for="calendarBackground">Background</label>
+      {{#with currentUpload}}
+        Uploading <b>{{file.name}}</b>:
+        <span id="progress">{{progress.get}}%</span>
+      {{else}}
+        <input type="file" name="background" class="form-control" id="calendarBackground" placeholder="Upload an image">
+      {{/with}}
+    </div>
+    <button type="submit" class="btn btn-advent btn-block">Change background</button>
+  </form>
+</template>
