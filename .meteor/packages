@@ -27,3 +27,4 @@ accounts-password
 arillo:flow-router-helpers
 momentjs:moment
 ostrio:files
+ostrio:meteor-root
