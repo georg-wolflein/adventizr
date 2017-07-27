@@ -1,0 +1,19 @@
+<template name="calendar_edit_size_form">
+  <form>
+    <div class="row">
+      <div class="col-lg">
+         <div class="form-group">
+          <label for="calendarWidth">Width (px)</label>
+          <input type="number" name="width" class="form-control" id="calendarWidth" placeholder="Set width" value="{{width}}" min="1">
+        </div>
+      </div>
+      <div class="col-lg">
+        <div class="form-group">
+          <label for="calendarHeight">Height (px)</label>
+          <input type="number" name="height" class="form-control" id="calendarHeight" placeholder="Set height" value="{{height}}" min="1">
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-advent btn-block">Update size</button>
+  </form>
+</template>

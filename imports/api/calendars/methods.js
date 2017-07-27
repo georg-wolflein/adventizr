@@ -30,6 +30,19 @@ Meteor.methods({
       }
     });
   },
+  'calendars.update.size'(_id, width, height) {
+    check(_id, String);
+    check(width, Number);
+    check(height, Number);
+
+    return Calendars.update(_id, {
+      $set: {
+        width,
+        height,
+        updated: new Date()
+      }
+    });
+  },
   'calendars.update.background'(_id, background) {
     check(_id, String);
 
@@ -41,3 +54,5 @@ Meteor.methods({
     });
   }
 });
+
+// TODO: change created/updated attributes with event hooks

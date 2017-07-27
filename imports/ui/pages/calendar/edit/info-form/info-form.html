@@ -1,0 +1,13 @@
+<template name="calendar_edit_info_form">
+  <form>
+    <div class="form-group">
+      <label for="calendarTitle">Title</label>
+      <input type="text" name="title" class="form-control" id="calendarTitle" placeholder="Enter a title" value="{{title}}">
+    </div>
+    <div class="form-group">
+      <label for="calendarDescription">Description</label>
+      <textarea name="description" class="form-control" id="calendarDescription" placeholder="Enter a description" value="{{description}}"></textarea>
+    </div>
+    <button type="submit" class="btn btn-advent btn-block">Update info</button>
+  </form>
+</template>

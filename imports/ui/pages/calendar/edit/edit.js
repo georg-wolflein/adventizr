@@ -2,7 +2,9 @@ import { Calendars } from '/imports/api/calendars/calendars.js';
 import { CalendarFiles } from '/imports/api/calendar-files/calendar-files.js';
 import { Meteor } from 'meteor/meteor';
 import './edit.html';
+import './info-form/info-form.js';
 import './background-form/background-form.js';
+import './size-form/size-form.js';
 
 Template.calendar_edit.onCreated(function() {
   Meteor.subscribe('calendars.all');
@@ -12,14 +14,9 @@ Template.calendar_edit.onCreated(function() {
 Template.calendar_edit.helpers({
   calendar() {
     var id = FlowRouter.getParam('_id');
-    return Calendars.findOne(id);
-  }
-});
-
-Template.calendar_edit.events({
-  'submit #calendarInfoForm'(event) {
-    event.preventDefault();
-    Meteor.call('calendars.update.info', FlowRouter.getParam('_id'), event.target.title.value, event.target.description.value);
-    // TODO: display success alert
+    var calendar = Calendars.findOne(id);
+    if (calendar && calendar.background)
+      calendar.backgroundImage = CalendarFiles.findOne(calendar.background).link();
+    return calendar;
   }
 });

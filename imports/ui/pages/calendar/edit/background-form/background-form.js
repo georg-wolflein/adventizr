@@ -6,37 +6,34 @@ import './background-form.html';
 
 Template.calendar_edit_background_form.onCreated(function() {
   this.currentUpload = new ReactiveVar(false);
-  //Meteor.subscribe('calendars.all');
-  //sMeteor.subscribe('files.calendar.all');
+  Meteor.subscribe('calendars.all');
+  Meteor.subscribe('files.calendar.all');
 });
 
 Template.calendar_edit_background_form.helpers({
-  /*
-  calendar() {
-    var id = FlowRouter.getParam('_id');
-    return Calendars.findOne(id);
-  },
-  */
   currentUpload() {
     return Template.instance().currentUpload.get();
   }
 });
 
 Template.calendar_edit_background_form.events({
-  'submit #calendarBackgroundForm'(event, template) {
+  'submit'(event, template) {
     event.preventDefault();
     var file = event.target.background.files[0];
 
     if (file) {
-      file.name = "background";
+      var meta = {
+        calendarId: template.data._id,
+        type: 'background'
+      };
       const upload = CalendarFiles.insert({
         file,
+        meta,
         streams: 'dynamic',
         chunkSize: 'dynamic'
       }, false);
 
       upload.on('start', () => {
-        console.log(template.currentUpload);
         template.currentUpload.set(this);
       });
 
@@ -44,8 +41,7 @@ Template.calendar_edit_background_form.events({
         if (error) {
           alert('Error during upload: ' + error);
         } else {
-          alert('File "' + fileObj.name + '" successfully uploaded');
-          console.log(fileObj);
+          // Success
         }
         template.currentUpload.set(false);
       });
