@@ -21,7 +21,7 @@ Template.calendar_edit_background_form.events({
     event.preventDefault();
     var file = event.target.background.files[0];
 
-    if (file) {
+    if (file && file.type.startsWith("image")) {
       var meta = {
         calendarId: template.data._id,
         type: 'background'
