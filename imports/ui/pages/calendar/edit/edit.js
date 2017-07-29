@@ -23,14 +23,18 @@ Template.calendar_edit.onRendered(function() {
       preserveAspectRatio: false,
       edges: { left: true, right: true, bottom: true, top: true }
     })
-    .on('resizemove', onResizeMove);
+    .on("resizemove", onResizeMove);
 });
 
 Template.calendar_edit.helpers({
   calendar() {
     var id = FlowRouter.getParam("_id");
     var calendar = Calendars.findOne(id);
-    if (calendar && calendar.background)
+    if (
+      calendar &&
+      calendar.background &&
+      CalendarFiles.findOne(calendar.background)
+    )
       calendar.backgroundImage = CalendarFiles.findOne(
         calendar.background
       ).link();
@@ -45,12 +49,12 @@ function onMove(event) {
     y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
 
   // Translate the element
-  target.style.webkitTransform = target.style.transform = "translate(" + x + "px, " + y + "px)";
+  target.style.webkitTransform = target.style.transform =
+    "translate(" + x + "px, " + y + "px)";
 
   // Update the posiion attributes
   target.setAttribute("data-x", x);
   target.setAttribute("data-y", y);
-  console.log(event);
 }
 
 function onResizeMove(event) {
@@ -66,7 +70,8 @@ function onResizeMove(event) {
   x += event.deltaRect.left;
   y += event.deltaRect.top;
 
-  target.style.webkitTransform = target.style.transform = "translate(" + x + "px," + y + "px)";
+  target.style.webkitTransform = target.style.transform =
+    "translate(" + x + "px," + y + "px)";
 
   target.setAttribute("data-x", x);
   target.setAttribute("data-y", y);
