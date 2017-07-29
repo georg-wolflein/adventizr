@@ -12,9 +12,13 @@ Meteor.methods({
     return Calendars.insert({
       title,
       description,
-      'user': Meteor.userId(),
+      user: Meteor.userId(),
       created: new Date(),
-      updated: new Date()
+      updated: new Date(),
+      // default width, height and doors
+      width: 400,
+      height: 400,
+      doors: generateCalendarDoors()
     });
   },
   'calendars.update.info'(_id, title, description) {
@@ -54,5 +58,23 @@ Meteor.methods({
     });
   }
 });
+
+function generateCalendarDoors() {
+  var doors = [];
+  for (var door = 0; door < 24; door++) {
+    doors.push({
+      number: door + 1,
+      width: 50,
+      height: 50,
+      x: 10 + (70 * (door % 6)),
+      y: 10 + (70 * Math.floor(door / 6)),
+      text: {
+        color: '000',
+        size: 12
+      }
+    });
+  }
+  return doors;
+}
 
 // TODO: change created/updated attributes with event hooks
