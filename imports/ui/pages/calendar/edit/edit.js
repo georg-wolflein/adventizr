@@ -11,9 +11,24 @@ import interact from 'interactjs';
 Template.calendar_edit.onCreated(function() {
   Meteor.subscribe('calendars.all');
   Meteor.subscribe('files.calendar.all');
+  this.calendar = new ReactiveVar(null);
+  this.selectedDoor = new ReactiveVar(null);
 });
 
 Template.calendar_edit.onRendered(function() {
+  this.autorun(() => {
+    var id = FlowRouter.getParam('_id');
+    var calendar = Calendars.findOne(id);
+    if (
+      calendar &&
+      calendar.background &&
+      CalendarFiles.findOne(calendar.background)
+    )
+      calendar.backgroundImage = CalendarFiles.findOne(
+        calendar.background
+      ).link();
+    this.calendar.set(calendar);
+  });
   interact('.resize-drag')
     .draggable({
       inertia: false,
@@ -28,31 +43,24 @@ Template.calendar_edit.onRendered(function() {
 
 Template.calendar_edit.helpers({
   calendar() {
-    var id = FlowRouter.getParam('_id');
-    var calendar = Calendars.findOne(id);
-    if (
-      calendar &&
-      calendar.background &&
-      CalendarFiles.findOne(calendar.background)
-    )
-      calendar.backgroundImage = CalendarFiles.findOne(
-        calendar.background
-      ).link();
-    return calendar;
+    return Template.instance().calendar.get();
+  },
+  selectedDoor() {
+    return Template.instance().selectedDoor.get();
   }
 });
 
-var selectedDoor = null;
-
 Template.calendar_edit.events({
-  'click .door'(event) {
+  'click .door'(event, template) {
     var target = event.target.classList.contains('door')
       ? event.target
       : event.target.parentElement;
-    if (selectedDoor && selectedDoor != target.id)
-      document.getElementById(selectedDoor).style.borderStyle = 'solid';
-    selectedDoor = target.id;
-
+    var number = template.selectedDoor.get()
+      ? template.selectedDoor.get().number
+      : null;
+    if (number && 'door' + number != target.id)
+      document.getElementById('door' + number).style.borderStyle = 'solid';
+    selectDoor(target.id.substring('door'.length));
     target.style.borderStyle = 'dashed';
   }
 });
@@ -90,4 +98,12 @@ function onResizeMove(event) {
 
   target.setAttribute('data-x', x);
   target.setAttribute('data-y', y);
+}
+
+function selectDoor(number) {
+  Template.instance().selectedDoor.set(
+    Template.instance().calendar.get().doors.find(element => {
+      return element.number == number;
+    })
+  );
 }
