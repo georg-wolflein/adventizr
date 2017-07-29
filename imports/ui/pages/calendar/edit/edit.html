@@ -80,7 +80,7 @@
             </div>
             <div style="position:absolute" class="resize-container">
               {{#each doors}}   
-                <div class="door resize-drag" style="position:absolute;left:{{x}}px;top:{{y}}px;width:{{width}}px;height:{{height}}px;border:2px solid;border-radius:5px;border-color:#{{text.color}}">
+                <div id="door{{number}}" class="door resize-drag" style="position:absolute;left:{{x}}px;top:{{y}}px;width:{{width}}px;height:{{height}}px;border:2px solid;border-radius:5px;border-color:#{{text.color}}">
                   <p class="door-number" color="color:#{{text.color}};font-size:{{text.size}}pt">
                     {{number}}
                   </p>
