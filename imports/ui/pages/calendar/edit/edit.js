@@ -69,8 +69,7 @@ Template.calendar_edit.events({
     var number = template.selectedDoor.get()
       ? template.selectedDoor.get().number
       : null;
-    //if (number && 'door' + number != target.id)
-    selectDoor(target.id.substring('door'.length));
+    selectDoor(target.getAttribute('data-door-number'));
   },
   'mousedown .door-background'(event, template) {
     selectDoor(null);
@@ -78,38 +77,26 @@ Template.calendar_edit.events({
 });
 
 function onMove(event) {
-  var target = event.target,
-    // Keep the dragged position in the data-x/data-y attributes
-    x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-    y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
-  // Translate the element
-  target.style.webkitTransform = target.style.transform =
-    'translate(' + x + 'px, ' + y + 'px)';
-
-  // Update the posiion attributes
-  target.setAttribute('data-x', x);
-  target.setAttribute('data-y', y);
+  event.target.style.left =
+    parseInt(event.target.style.left, 10) + event.dx + 'px';
+  event.target.style.top =
+    parseInt(event.target.style.top, 10) + event.dy + 'px';
 }
 
 function onResizeMove(event) {
-  var target = event.target,
-    x = parseFloat(target.getAttribute('data-x')) || 0,
-    y = parseFloat(target.getAttribute('data-y')) || 0;
-
   // Update the element's style
-  target.style.width = event.rect.width + 'px';
-  target.style.height = event.rect.height + 'px';
+  event.target.style.width = event.rect.width + 'px';
+  event.target.style.height = event.rect.height + 'px';
 
   // Translate when resizing from top or left edges
-  x += event.deltaRect.left;
-  y += event.deltaRect.top;
-
-  target.style.webkitTransform = target.style.transform =
-    'translate(' + x + 'px,' + y + 'px)';
-
-  target.setAttribute('data-x', x);
-  target.setAttribute('data-y', y);
+  event.target.style.left =
+    parseInt(event.target.style.left, 10) +
+    parseInt(event.deltaRect.left, 10) +
+    'px';
+  event.target.style.top =
+    parseInt(event.target.style.top, 10) +
+    parseInt(event.deltaRect.top, 10) +
+    'px';
 }
 
 function selectDoor(number) {
