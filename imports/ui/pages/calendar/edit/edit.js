@@ -13,28 +13,29 @@ Template.calendar_edit.onCreated(function() {
   Meteor.subscribe('files.calendar.all');
   this.calendar = new ReactiveVar(null);
   this.selectedDoor = new ReactiveVar(null);
+  this.unsavedDoors = null;
 });
 
 Template.calendar_edit.onRendered(function() {
   this.autorun(() => {
     var id = FlowRouter.getParam('_id');
     var calendar = Calendars.findOne(id);
-    if (
-      calendar &&
-      calendar.background &&
-      CalendarFiles.findOne(calendar.background)
-    )
-      calendar.backgroundImage = CalendarFiles.findOne(
-        calendar.background
-      ).link();
+    if (calendar) {
+      this.unsavedDoors = calendar.doors;
+      if (calendar.background && CalendarFiles.findOne(calendar.background))
+        calendar.backgroundImage = CalendarFiles.findOne(
+          calendar.background
+        ).link();
+    }
+
     this.calendar.set(calendar);
   });
   this.autorun(() => {
     var number = this.selectedDoor.get()
       ? this.selectedDoor.get().number
       : null;
-    if (this.calendar.get())
-      this.calendar.get().doors.forEach(function(door) {
+    if (this.unsavedDoors)
+      this.unsavedDoors.forEach(function(door) {
         if (document.getElementById('door' + door.number))
           document.getElementById('door' + door.number).style.borderStyle =
             door.number == number ? 'dashed' : 'solid';
@@ -58,6 +59,9 @@ Template.calendar_edit.helpers({
   },
   selectedDoor() {
     return Template.instance().selectedDoor.get();
+  },
+  unsavedDoors() {
+    return Template.instance().unsavedDoors;
   }
 });
 
@@ -102,12 +106,11 @@ function onResizeMove(event) {
 }
 
 function selectDoor(number) {
-  console.log(number);
   Template.instance().selectedDoor.set(
     number
-      ? Template.instance()
-          .calendar.get()
-          .doors.find(element => element.number == number)
+      ? Template.instance().unsavedDoors.find(
+          element => element.number == number
+        )
       : null
   );
 }
