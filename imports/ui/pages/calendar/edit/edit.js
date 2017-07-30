@@ -29,6 +29,17 @@ Template.calendar_edit.onRendered(function() {
       ).link();
     this.calendar.set(calendar);
   });
+  this.autorun(() => {
+    var number = this.selectedDoor.get()
+      ? this.selectedDoor.get().number
+      : null;
+    if (this.calendar.get())
+      this.calendar.get().doors.forEach(function(door) {
+        if (document.getElementById('door' + door.number))
+          document.getElementById('door' + door.number).style.borderStyle =
+            door.number == number ? 'dashed' : 'solid';
+      }, this);
+  });
   interact('.resize-drag')
     .draggable({
       inertia: false,
@@ -51,17 +62,18 @@ Template.calendar_edit.helpers({
 });
 
 Template.calendar_edit.events({
-  'click .door'(event, template) {
+  'mousedown .door'(event, template) {
     var target = event.target.classList.contains('door')
       ? event.target
       : event.target.parentElement;
     var number = template.selectedDoor.get()
       ? template.selectedDoor.get().number
       : null;
-    if (number && 'door' + number != target.id)
-      document.getElementById('door' + number).style.borderStyle = 'solid';
+    //if (number && 'door' + number != target.id)
     selectDoor(target.id.substring('door'.length));
-    target.style.borderStyle = 'dashed';
+  },
+  'mousedown .door-background'(event, template) {
+    selectDoor(null);
   }
 });
 
@@ -101,9 +113,12 @@ function onResizeMove(event) {
 }
 
 function selectDoor(number) {
+  console.log(number);
   Template.instance().selectedDoor.set(
-    Template.instance().calendar.get().doors.find(element => {
-      return element.number == number;
-    })
+    number
+      ? Template.instance().calendar.get().doors.find(element => {
+          return element.number == number;
+        })
+      : null
   );
 }

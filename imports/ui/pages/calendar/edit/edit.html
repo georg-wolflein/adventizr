@@ -58,14 +58,43 @@
               <div class="card-header" role="tab" id="headingEditDoor">
                 <h5 class="mb-0">
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapseEditDoor" aria-expanded="true" aria-controls="collapseEditDoor">
-                    Edit door
+                    Edit door {{selectedDoor.number}}
                   </a>
                 </h5>
               </div>
               <div id="collapseEditDoor" class="collapse show" role="tabpanel" aria-labelledby="headingEditDoor">
                 <div class="card-block">
                   {{#with selectedDoor}}
-                    {{number}}
+                    <form>
+                      <div class="row">
+                        <div class="col-lg">
+                          <div class="form-group">
+                            <label for="doorWidth">Width (px)</label>
+                            <input type="number" name="width" class="form-control" id="doorWidth" placeholder="Set width" value="{{width}}" min="1">
+                          </div>
+                        </div>
+                        <div class="col-lg">
+                          <div class="form-group">
+                            <label for="doorHeight">Height (px)</label>
+                            <input type="number" name="height" class="form-control" id="doorHeight" placeholder="Set height" value="{{height}}" min="1">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg">
+                          <div class="form-group">
+                            <label for="doorX">X (px)</label>
+                            <input type="number" name="x" class="form-control" id="doorX" placeholder="Set x" value="{{width}}" min="1">
+                          </div>
+                        </div>
+                        <div class="col-lg">
+                          <div class="form-group">
+                            <label for="doorY">Y (px)</label>
+                            <input type="number" name="y" class="form-control" id="doorY" placeholder="Set y" value="{{height}}" min="1">
+                          </div>
+                        </div>
+                      </div>
+                    </form>
                   {{/with}}
                 </div>
               </div>
@@ -75,10 +104,10 @@
         </div>
 
 
-        <div class="col-md-8">
+        <div class="col-md-8" style="height:{{height}}px;">
           <div style="position:relative">
             <div style="position:absolute">
-              <img src="{{backgroundImage}}" width="{{width}}" height="{{height}}">
+              <img src="{{backgroundImage}}" width="{{width}}" height="{{height}}" class="door-background">
             </div>
             <div style="position:absolute" class="resize-container">
               {{#each doors}}   
