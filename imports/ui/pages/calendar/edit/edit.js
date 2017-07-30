@@ -105,9 +105,9 @@ function selectDoor(number) {
   console.log(number);
   Template.instance().selectedDoor.set(
     number
-      ? Template.instance().calendar.get().doors.find(element => {
-          return element.number == number;
-        })
+      ? Template.instance()
+          .calendar.get()
+          .doors.find(element => element.number == number)
       : null
   );
 }
