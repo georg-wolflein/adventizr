@@ -84,9 +84,11 @@ function onMove(event) {
 }
 
 function onResizeMove(event) {
-  // Update the element's style
-  event.target.style.width = event.rect.width + 'px';
-  event.target.style.height = event.rect.height + 'px';
+  // Update the element's style, forcing minimum width
+  let width = parseInt(event.rect.width, 10),
+    height = parseInt(event.rect.height, 10);
+  event.target.style.width = (width > 30 ? width : 30) + 'px';
+  event.target.style.height = (height > 30 ? height : 30) + 'px';
 
   // Translate when resizing from top or left edges
   event.target.style.left =
