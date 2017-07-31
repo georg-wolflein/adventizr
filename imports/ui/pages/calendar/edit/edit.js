@@ -8,38 +8,21 @@ import './size-form/size-form.js';
 
 import interact from 'interactjs';
 
+let calendar = new ReactiveVar(null),
+  selectedDoor = new ReactiveVar(null);
+
 Template.calendar_edit.onCreated(function() {
   Meteor.subscribe('calendars.all');
   Meteor.subscribe('files.calendar.all');
-  this.calendar = new ReactiveVar(null);
-  this.selectedDoor = new ReactiveVar(null);
-  this.unsavedDoors = null;
 });
 
 Template.calendar_edit.onRendered(function() {
   this.autorun(() => {
-    var id = FlowRouter.getParam('_id');
-    var calendar = Calendars.findOne(id);
-    if (calendar) {
-      this.unsavedDoors = calendar.doors;
-      if (calendar.background && CalendarFiles.findOne(calendar.background))
-        calendar.backgroundImage = CalendarFiles.findOne(
-          calendar.background
-        ).link();
-    }
-
-    this.calendar.set(calendar);
-  });
-  this.autorun(() => {
-    var number = this.selectedDoor.get()
-      ? this.selectedDoor.get().number
-      : null;
-    if (this.unsavedDoors)
-      this.unsavedDoors.forEach(function(door) {
-        if (document.getElementById('door' + door.number))
-          document.getElementById('door' + door.number).style.borderStyle =
-            door.number == number ? 'dashed' : 'solid';
-      }, this);
+    let id = FlowRouter.getParam('_id'),
+      cal = Calendars.findOne(id);
+    if (cal && cal.background && CalendarFiles.findOne(cal.background))
+      cal.backgroundImage = CalendarFiles.findOne(cal.background).link();
+    calendar.set(cal);
   });
   interact('.resize-drag')
     .draggable({
@@ -55,62 +38,77 @@ Template.calendar_edit.onRendered(function() {
 
 Template.calendar_edit.helpers({
   calendar() {
-    return Template.instance().calendar.get();
+    return calendar.get();
   },
   selectedDoor() {
-    return Template.instance().selectedDoor.get();
-  },
-  unsavedDoors() {
-    return Template.instance().unsavedDoors;
+    return selectedDoor.get();
   }
 });
 
 Template.calendar_edit.events({
   'mousedown .door'(event, template) {
-    var target = event.target.classList.contains('door')
-      ? event.target
-      : event.target.parentElement;
-    var number = template.selectedDoor.get()
-      ? template.selectedDoor.get().number
-      : null;
-    selectDoor(target.getAttribute('data-door-number'));
+    let target = event.target.classList.contains('door')
+        ? event.target
+        : event.target.parentElement,
+      number = target.getAttribute('data-door-number');
+    // Check if selection changed
+    if (!selectedDoor.get() || selectedDoor.get().number != number)
+      changeSelection(number);
   },
   'mousedown .door-background'(event, template) {
-    selectDoor(null);
+    if (selectedDoor.get()) changeSelection(null);
   }
 });
 
 function onMove(event) {
-  event.target.style.left =
-    parseInt(event.target.style.left, 10) + event.dx + 'px';
-  event.target.style.top =
-    parseInt(event.target.style.top, 10) + event.dy + 'px';
+  selectedDoor.get().x += event.dx;
+  selectedDoor.get().y += event.dy;
+  updateCalendarDoors();
 }
 
 function onResizeMove(event) {
-  // Update the element's style, forcing minimum width
-  let width = parseInt(event.rect.width, 10),
+  // Define new element properties
+  let x = selectedDoor.get().x + parseInt(event.deltaRect.left, 10),
+    y = selectedDoor.get().y + parseInt(event.deltaRect.top, 10),
+    width = parseInt(event.rect.width, 10),
     height = parseInt(event.rect.height, 10);
-  event.target.style.width = (width > 30 ? width : 30) + 'px';
-  event.target.style.height = (height > 30 ? height : 30) + 'px';
-
-  // Translate when resizing from top or left edges
-  event.target.style.left =
-    parseInt(event.target.style.left, 10) +
-    parseInt(event.deltaRect.left, 10) +
-    'px';
-  event.target.style.top =
-    parseInt(event.target.style.top, 10) +
-    parseInt(event.deltaRect.top, 10) +
-    'px';
+  // Force minimum width and height
+  width = width > 30 ? width : 30;
+  height = height > 30 ? height : 30;
+  // Update element style
+  selectedDoor.get().x = x;
+  selectedDoor.get().y = y;
+  selectedDoor.get().width = width;
+  selectedDoor.get().height = height;
+  updateCalendarDoors();
 }
 
-function selectDoor(number) {
-  Template.instance().selectedDoor.set(
-    number
-      ? Template.instance().unsavedDoors.find(
-          element => element.number == number
+function changeSelection(number) {
+  calendar.set(
+    Object.assign(calendar.get(), {
+      doors: calendar
+        .get()
+        .doors.map(element =>
+          Object.assign(element, { selected: element.number == number })
         )
-      : null
+    })
+  );
+  selectedDoor.set(
+    calendar.get().doors.find(element => element.number == number)
+  );
+}
+
+function updateCalendarDoors() {
+  calendar.set(
+    Object.assign(calendar.get(), {
+      doors: calendar
+        .get()
+        .doors.map(
+          element =>
+            element.number == selectedDoor.get().number
+              ? selectedDoor.get()
+              : element
+        )
+    })
   );
 }

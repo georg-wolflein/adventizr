@@ -65,7 +65,7 @@
               <div id="collapseEditDoor" class="collapse show" role="tabpanel" aria-labelledby="headingEditDoor">
                 <div class="card-block">
                   {{#with selectedDoor}}
-                    <form>
+                    <form id="selectedDoorForm">
                       <div class="row">
                         <div class="col-lg">
                           <div class="form-group">
@@ -84,13 +84,13 @@
                         <div class="col-lg">
                           <div class="form-group">
                             <label for="doorX">X (px)</label>
-                            <input type="number" name="x" class="form-control" id="doorX" placeholder="Set x" value="{{width}}" min="1">
+                            <input type="number" name="x" class="form-control" id="doorX" placeholder="Set x" value="{{x}}" min="1">
                           </div>
                         </div>
                         <div class="col-lg">
                           <div class="form-group">
                             <label for="doorY">Y (px)</label>
-                            <input type="number" name="y" class="form-control" id="doorY" placeholder="Set y" value="{{height}}" min="1">
+                            <input type="number" name="y" class="form-control" id="doorY" placeholder="Set y" value="{{y}}" min="1">
                           </div>
                         </div>
                       </div>
@@ -110,12 +110,12 @@
               <img src="{{backgroundImage}}" width="{{width}}" height="{{height}}" class="door-background">
             </div>
             <div style="position:absolute" class="resize-container">
-              {{#each unsavedDoors}}   
-                <div id="door{{number}}" class="door resize-drag"  data-door-number="{{number}}" style="position:absolute;left:{{x}}px;top:{{y}}px;width:{{width}}px;height:{{height}}px;border:2px solid;border-radius:5px;border-color:#{{text.color}}">
+              {{#each doors}}
+                <div id="door{{number}}" class="door resize-drag"  data-door-number="{{number}}" style="position:absolute;left:{{x}}px;top:{{y}}px;width:{{width}}px;height:{{height}}px;border:2px {{#if selected}}dashed{{else}}solid{{/if}};border-radius:5px;border-color:#{{text.color}}">
                   <p class="door-number" color="color:#{{text.color}};font-size:{{text.size}}pt">
                     {{number}}
                   </p>
-                </div>
+                </div> 
               {{/each}}
             </div>
           </div>
