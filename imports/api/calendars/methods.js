@@ -56,6 +56,17 @@ Meteor.methods({
         updated: new Date()
       }
     });
+  },
+  'calendars.update.doors'(_id, doors) {
+    check(_id, String);
+    check(doors, Array);
+
+    return Calendars.update(_id, {
+      $set: {
+        doors,
+        updated: new Date()
+      }
+    });
   }
 });
 
@@ -66,8 +77,8 @@ function generateCalendarDoors() {
       number: door + 1,
       width: 50,
       height: 50,
-      x: 10 + (70 * (door % 6)),
-      y: 10 + (70 * Math.floor(door / 6)),
+      x: 10 + 70 * (door % 6),
+      y: 10 + 70 * Math.floor(door / 6),
       text: {
         color: '000',
         size: 12

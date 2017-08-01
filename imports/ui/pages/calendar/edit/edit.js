@@ -57,6 +57,16 @@ Template.calendar_edit.events({
   },
   'mousedown .door-background'(event, template) {
     if (selectedDoor.get()) changeSelection(null);
+  },
+  'click #save'(event, template) {
+    // Deselect
+    changeSelection(null);
+    // Save doors to database
+    Meteor.call(
+      'calendars.update.doors',
+      calendar.get()._id,
+      calendar.get().doors
+    );
   }
 });
 
