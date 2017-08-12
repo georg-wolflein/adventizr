@@ -5,6 +5,7 @@ import './edit.html';
 import './info-form/info-form.js';
 import './background-form/background-form.js';
 import './size-form/size-form.js';
+import './door-form/door-form.js';
 
 import interact from 'interactjs';
 

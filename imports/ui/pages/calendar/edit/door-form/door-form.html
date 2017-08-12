@@ -1,0 +1,32 @@
+<template name="calendar_edit_door_form">
+  <form id="selectedDoorForm">
+    <div class="row">
+      <div class="col-lg">
+        <div class="form-group">
+          <label for="doorWidth">Width (px)</label>
+          <input readonly type="number" name="width" class="form-control" id="doorWidth" value="{{width}}" min="1">
+        </div>
+      </div>
+      <div class="col-lg">
+        <div class="form-group">
+          <label for="doorHeight">Height (px)</label>
+          <input readonly type="number" name="height" class="form-control" id="doorHeight" value="{{height}}" min="1">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg">
+        <div class="form-group">
+          <label for="doorX">X (px)</label>
+          <input readonly type="number" name="x" class="form-control" id="doorX" value="{{x}}" min="1">
+        </div>
+      </div>
+      <div class="col-lg">
+        <div class="form-group">
+          <label for="doorY">Y (px)</label>
+          <input readonly type="number" name="y" class="form-control" id="doorY" value="{{y}}" min="1">
+        </div>
+      </div>
+    </div>
+  </form>
+</template>

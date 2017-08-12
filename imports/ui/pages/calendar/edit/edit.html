@@ -65,36 +65,7 @@
               <div id="collapseEditDoor" class="collapse show" role="tabpanel" aria-labelledby="headingEditDoor">
                 <div class="card-block">
                   {{#with selectedDoor}}
-                    <form id="selectedDoorForm">
-                      <div class="row">
-                        <div class="col-lg">
-                          <div class="form-group">
-                            <label for="doorWidth">Width (px)</label>
-                            <input readonly type="number" name="width" class="form-control" id="doorWidth" placeholder="Set width" value="{{width}}" min="1">
-                          </div>
-                        </div>
-                        <div class="col-lg">
-                          <div class="form-group">
-                            <label for="doorHeight">Height (px)</label>
-                            <input readonly type="number" name="height" class="form-control" id="doorHeight" placeholder="Set height" value="{{height}}" min="1">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-lg">
-                          <div class="form-group">
-                            <label for="doorX">X (px)</label>
-                            <input readonly type="number" name="x" class="form-control" id="doorX" placeholder="Set x" value="{{x}}" min="1">
-                          </div>
-                        </div>
-                        <div class="col-lg">
-                          <div class="form-group">
-                            <label for="doorY">Y (px)</label>
-                            <input readonly type="number" name="y" class="form-control" id="doorY" placeholder="Set y" value="{{y}}" min="1">
-                          </div>
-                        </div>
-                      </div>
-                    </form>
+                    {{> calendar_edit_door_form}}
                   {{/with}}
                 </div>
               </div>
