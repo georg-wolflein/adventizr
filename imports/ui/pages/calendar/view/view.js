@@ -8,7 +8,7 @@ Template.calendar_view.onCreated(() => {
 
 Template.calendar_view.helpers({
   calendar() {
-    var id = FlowRouter.getParam("_id");
+    var id = FlowRouter.getParam('_id');
     return Calendars.findOne(id);
   }
 });

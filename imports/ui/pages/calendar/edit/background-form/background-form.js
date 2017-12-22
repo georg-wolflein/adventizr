@@ -1,7 +1,7 @@
 import { Calendars } from '/imports/api/calendars/calendars.js';
 import { CalendarFiles } from '/imports/api/calendar-files/calendar-files.js';
 import { Meteor } from 'meteor/meteor';
-import { ReactiveVar } from 'meteor/reactive-var'
+import { ReactiveVar } from 'meteor/reactive-var';
 import './background-form.html';
 
 Template.calendar_edit_background_form.onCreated(function() {
@@ -17,21 +17,24 @@ Template.calendar_edit_background_form.helpers({
 });
 
 Template.calendar_edit_background_form.events({
-  'submit'(event, template) {
+  submit(event, template) {
     event.preventDefault();
     var file = event.target.background.files[0];
 
-    if (file && file.type.startsWith("image")) {
+    if (file && file.type.startsWith('image')) {
       var meta = {
         calendarId: template.data._id,
         type: 'background'
       };
-      const upload = CalendarFiles.insert({
-        file,
-        meta,
-        streams: 'dynamic',
-        chunkSize: 'dynamic'
-      }, false);
+      const upload = CalendarFiles.insert(
+        {
+          file,
+          meta,
+          streams: 'dynamic',
+          chunkSize: 'dynamic'
+        },
+        false
+      );
 
       upload.on('start', () => {
         template.currentUpload.set(this);
@@ -48,6 +51,5 @@ Template.calendar_edit_background_form.events({
 
       upload.start();
     }
-
   }
 });
