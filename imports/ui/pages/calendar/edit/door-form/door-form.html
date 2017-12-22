@@ -1,5 +1,16 @@
 <template name="calendar_edit_door_form">
+  {{#with door}}
   <form id="selectedDoorForm">
+    <div class="row">
+      <div class="col-lg">
+        <div class="form-group">
+          <label for="doorGift">Gift</label>
+          <input type="file" name="gift" class="form-control" id="gift" placeholder="Upload a gift">
+        </div>
+        <button id="uploadGift" class="btn btn-advent btn-block">Upload</button>
+      </div>
+    </div>
+    <hr>
     <div class="row">
       <div class="col-lg">
         <div class="form-group">
@@ -29,4 +40,5 @@
       </div>
     </div>
   </form>
+  {{/with}}
 </template>

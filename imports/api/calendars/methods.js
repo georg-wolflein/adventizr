@@ -82,7 +82,8 @@ function generateCalendarDoors() {
       text: {
         color: '000',
         size: 12
-      }
+      },
+      gift: undefined
     });
   }
   return doors;
