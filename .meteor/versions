@@ -59,6 +59,7 @@ modules-runtime@0.8.0
 momentjs:moment@2.18.1
 mongo@1.1.22
 mongo-id@1.0.6
+nimble:restivus@0.8.12
 npm-bcrypt@0.9.3
 npm-mongo@2.2.30
 observe-sequence@1.0.16
@@ -82,6 +83,7 @@ routepolicy@1.0.12
 seba:minifiers-autoprefixer@1.0.1
 service-configuration@1.0.11
 sha@1.0.9
+simple:json-routes@2.1.0
 spacebars@1.0.15
 spacebars-compiler@1.1.2
 srp@1.0.10
