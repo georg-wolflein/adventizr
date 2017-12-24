@@ -43,6 +43,10 @@ Template.calendar_edit.helpers({
   },
   selectedDoor() {
     return selectedDoor.get();
+  },
+  isSelected() {
+    console.log(this);
+    return '';
   }
 });
 
@@ -66,7 +70,10 @@ Template.calendar_edit.events({
     Meteor.call(
       'calendars.update.doors',
       calendar.get()._id,
-      calendar.get().doors
+      calendar.get().doors.map(door => {
+        if (door.hasOwnProperty('selected')) delete door.selected;
+        return door;
+      })
     );
   }
 });
