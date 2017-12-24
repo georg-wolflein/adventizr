@@ -29,6 +29,7 @@ Api.addRoute('calendars/:_id', {
   }
 });
 
+/*
 Picker.filter(
   (req, res) => req.method == 'GET'
 ).route('/api/v1/calendars/:_id/download', (params, req, res) => {
@@ -37,4 +38,4 @@ Picker.filter(
       Meteor.settings.public.CALENDAR_FILES_PATH + '/' + params._id + '.zip'
     )
   );
-});
+});*/
