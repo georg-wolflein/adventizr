@@ -5,7 +5,7 @@ import tether from 'tether';
 global.Tether = tether;
 
 // Bootstrap.js
-bootstrap = require('bootstrap');
+import bootstrap from 'bootstrap';
 
 // Universal components
 import '/imports/ui/components/playstore-button/playstore-button.js';
