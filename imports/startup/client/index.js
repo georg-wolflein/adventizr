@@ -5,6 +5,7 @@ import tether from 'tether';
 global.Tether = tether;
 
 // Bootstrap.js
+Popper = require('popper.js');
 bootstrap = require('bootstrap');
 
 // Universal components
