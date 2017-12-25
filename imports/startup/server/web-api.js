@@ -1,5 +1,6 @@
 import { Calendars } from '/imports/api/calendars/calendars.js';
 import fs from 'fs';
+import exportCalendar from '/imports/api/calendars/export-calendar.js';
 
 // Global API configuration
 var Api = new Restivus({
@@ -32,14 +33,6 @@ Api.addRoute('calendars/:_id', {
 Picker.filter((req, res) => req.method == 'GET').route(
   '/api/v1/calendars/:_id/download',
   (params, req, res) => {
-    try {
-      res.end(
-        fs.readFileSync(
-          Meteor.settings.public.CALENDAR_FILES_PATH + '/' + params._id + '.zip'
-        )
-      );
-    } catch (e) {
-      res.end(JSON.stringify({ status: 'failed', error: 'file not found' }));
-    }
+    exportCalendar(params._id).pipe(res);
   }
 );
