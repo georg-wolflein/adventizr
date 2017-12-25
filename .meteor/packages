@@ -30,3 +30,4 @@ ostrio:files
 ostrio:meteor-root
 nimble:restivus
 matb33:collection-hooks
+shell-server
