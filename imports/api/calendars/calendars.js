@@ -2,7 +2,6 @@
 
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-import exportCalendar from './export-calendar';
 
 export const Calendars = new Mongo.Collection('calendars', {
   transform(doc) {
@@ -12,6 +11,3 @@ export const Calendars = new Mongo.Collection('calendars', {
     return doc;
   }
 });
-
-Calendars.after.insert((userId, doc) => exportCalendar(doc._id));
-Calendars.after.update((userId, doc) => exportCalendar(doc._id));

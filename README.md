@@ -5,3 +5,12 @@ A digital cloud-based advent calendar for everyone.
 ```
 meteor run --settings settings-production.json
 ```
+
+## Web API
+The web API is at `/api/v1/`. It currently supports the following operations:
+
+| Method | Path | Description |
+|--|--|--|
+| `GET` | `/calendars` | Get a list of all calendars |
+| `GET` | `/calendars/:id` | Get the basic information of the calendar with that `id` |
+| `GET` | `/calendars/:id/download` | Download the calendar with that `id` as a ZIP archive |
