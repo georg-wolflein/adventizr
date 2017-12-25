@@ -17,8 +17,8 @@
                   </a>
                 </h5>
               </div>
-              <div id="collapseEditCalendar" class="collapse" role="tabpanel" aria-labelledby="headingEditCalendar">
-                <div class="card-block">
+              <div id="collapseEditCalendar" class="collapse" role="tabpanel" aria-labelledby="headingEditCalendar" data-parent="#accordion">
+                <div class="card-body">
                   {{> calendar_edit_info_form}}
                 </div>
               </div>
@@ -32,8 +32,8 @@
                   </a>
                 </h5>
               </div>
-              <div id="collapseEditBackground" class="collapse" role="tabpanel" aria-labelledby="headingEditBackground">
-                <div class="card-block">
+              <div id="collapseEditBackground" class="collapse" role="tabpanel" aria-labelledby="headingEditBackground" data-parent="#accordion">
+                <div class="card-body">
                   {{> calendar_edit_background_form}}
                 </div>
               </div>
@@ -47,8 +47,8 @@
                   </a>
                 </h5>
               </div>
-              <div id="collapseEditSize" class="collapse" role="tabpanel" aria-labelledby="headingEditSize">
-                <div class="card-block">
+              <div id="collapseEditSize" class="collapse" role="tabpanel" aria-labelledby="headingEditSize" data-parent="#accordion">
+                <div class="card-body">
                   {{> calendar_edit_size_form}}
                 </div>
               </div>
@@ -62,8 +62,8 @@
                   </a>
                 </h5>
               </div>
-              <div id="collapseEditDoor" class="collapse show" role="tabpanel" aria-labelledby="headingEditDoor">
-                <div class="card-block">
+              <div id="collapseEditDoor" class="collapse show" role="tabpanel" aria-labelledby="headingEditDoor" data-parent="#accordion">
+                <div class="card-body">
                   {{> calendar_edit_door_form _id=_id door=selectedDoor}}
                 </div>
               </div>
