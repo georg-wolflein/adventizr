@@ -1,34 +1,32 @@
 <template name="navbar">
-  <nav class="navbar sticky-top navbar-toggleable-md navbar-inverse">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-sm sticky-top navbar-dark">
+    <a class="navbar-brand" href="{{pathFor 'app.home'}}">adventizr.</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="container">
-      <a class="navbar-brand" href="{{pathFor 'app.home'}}">adventizr.</a>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{{pathFor 'app.home'}}">home</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{{pathFor 'app.home'}}">home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#features">features</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        {{#if currentUser}}
+          <li class="nav-item">
+            <a class="nav-link" href="{{pathFor 'user.profile'}}">profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#features">features</a>
+            <a class="nav-link logout" href="">logout</a>
           </li>
-        </ul>
-        <ul class="navbar-nav">
-          {{#if currentUser}}
-            <li class="nav-item">
-              <a class="nav-link" href="{{pathFor 'user.profile'}}">profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link logout" href="">logout</a>
-            </li>
-          {{else}}
-            <li class="nav-item">
-              <a class="nav-link" href="{{pathFor 'app.login'}}">login</a>
-            </li>
-          {{/if}}
-        </ul>
-      </div>
+        {{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="{{pathFor 'app.login'}}">login</a>
+          </li>
+        {{/if}}
+      </ul>
     </div>
   </nav>
 </template>
