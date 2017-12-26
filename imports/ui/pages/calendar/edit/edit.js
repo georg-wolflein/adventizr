@@ -43,6 +43,9 @@ Template.calendar_edit.helpers({
   },
   selectedDoor() {
     return selectedDoor.get();
+  },
+  isSelected(number) {
+    return selectedDoor.get() && selectedDoor.get().number == number;
   }
 });
 
@@ -59,17 +62,23 @@ Template.calendar_edit.events({
   'mousedown .door-background'(event, template) {
     if (selectedDoor.get()) changeSelection(null);
   },
+  'mouseup .door'(event, template) {
+    save();
+    changeSelection(selectedDoor.get().number);
+  },
   'click #save'(event, template) {
-    // Deselect
     changeSelection(null);
-    // Save doors to database
-    Meteor.call(
-      'calendars.update.doors',
-      calendar.get()._id,
-      calendar.get().doors
-    );
+    save();
   }
 });
+
+function save() {
+  Meteor.call(
+    'calendars.update.doors',
+    calendar.get()._id,
+    calendar.get().doors
+  );
+}
 
 function onMove(event) {
   selectedDoor.get().x += event.dx;
@@ -95,15 +104,6 @@ function onResizeMove(event) {
 }
 
 function changeSelection(number) {
-  calendar.set(
-    Object.assign(calendar.get(), {
-      doors: calendar
-        .get()
-        .doors.map(element =>
-          Object.assign(element, { selected: element.number == number })
-        )
-    })
-  );
   selectedDoor.set(
     calendar.get().doors.find(element => element.number == number)
   );

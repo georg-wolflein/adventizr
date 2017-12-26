@@ -3,17 +3,19 @@
     <a href="{{pathFor 'calendar.view' _id=_id}}">
       <img class="card-img-top" src="http://via.placeholder.com/318x180" alt="Card image cap">
     </a>
-    <div class="card-block">
+    <div class="card-body">
       <h4 class="card-title">{{title}}</h4>
       <p class="card-text">{{description}}</p>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
-        <span class="text-muted"><small class="text-muted">updated {{formatDate updated}}</small></span>
-        <span class="ml-auto">
+        <span class="ml-auto text-muted">
           by <a href="#">@{{user.username}}</a>
         </span>
       </li>
     </ul>
+    <div class="card-footer text-muted">
+      <small>updated {{formatDate updated}}</small>
+    </div>
   </div>
 </template>
