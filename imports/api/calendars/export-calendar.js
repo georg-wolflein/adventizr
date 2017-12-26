@@ -8,13 +8,11 @@ import JSZip from 'jszip';
  */
 module.exports = id => {
   var folder = Meteor.settings.public.CALENDAR_FILES_PATH + '/' + id,
-    jsonFile = folder + '/calendar.json',
-    jsonContent = JSON.stringify(Calendars.findOne(id)),
     zip = new JSZip();
   if (!fs.existsSync(folder)) fs.mkdirSync(folder);
-  fs.writeFileSync(jsonFile, jsonContent);
   fs
     .readdirSync(folder)
     .forEach(file => zip.file(file, fs.readFileSync(folder + '/' + file)));
+  zip.file('calendar.json', JSON.stringify(Calendars.findOne(id)));
   return zip.generateNodeStream({ streamFiles: true });
 };
