@@ -76,10 +76,7 @@ function save() {
   Meteor.call(
     'calendars.update.doors',
     calendar.get()._id,
-    calendar.get().doors.map(door => {
-      if (door.hasOwnProperty('selected')) delete door.selected;
-      return door;
-    })
+    calendar.get().doors
   );
 }
 
@@ -107,15 +104,6 @@ function onResizeMove(event) {
 }
 
 function changeSelection(number) {
-  calendar.set(
-    Object.assign(calendar.get(), {
-      doors: calendar
-        .get()
-        .doors.map(element =>
-          Object.assign(element, { selected: element.number == number })
-        )
-    })
-  );
   selectedDoor.set(
     calendar.get().doors.find(element => element.number == number)
   );
