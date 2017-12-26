@@ -7,7 +7,7 @@
 }
 
 .btn-advent {
-  @include button-variant($btn-advent-color, $btn-advent-bg, $btn-advent-border);
+  @include button-variant($btn-advent-bg, $btn-advent-border);
 }
 
 .btn-outline-advent {
