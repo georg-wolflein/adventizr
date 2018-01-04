@@ -11,6 +11,7 @@ The web API is at `/api/v1/`. It currently supports the following operations:
 
 | Method | Path | Description |
 |--|--|--|
-| `GET` | `/calendars` | Get a list of all calendars |
-| `GET` | `/calendars/:id` | Get the basic information of the calendar with that `id` |
-| `GET` | `/calendars/:id/download` | Download the calendar with that `id` as a ZIP archive |
+| `GET` | `/status` | Returns the current status of the API. The wuery parameter `?format=plain` will use plain text instead of JSON. |
+| `GET` | `/calendars` | Get a list of all calendars. |
+| `GET` | `/calendars/:id` | Get the basic information of the calendar with that `id`. |
+| `GET` | `/calendars/:id/download` | Download the calendar with that `id` as a ZIP archive.. |

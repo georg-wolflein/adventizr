@@ -19,13 +19,13 @@ var calendarFields = {
 };
 
 Api.addRoute('calendars', {
-  get: function() {
+  get() {
     return Calendars.find({}, { fields: calendarFields }).fetch();
   }
 });
 
 Api.addRoute('calendars/:_id', {
-  get: function() {
+  get() {
     return Calendars.findOne(this.urlParams._id, { fields: calendarFields });
   }
 });
@@ -36,3 +36,14 @@ Picker.filter((req, res) => req.method == 'GET').route(
     exportCalendar(params._id).pipe(res);
   }
 );
+
+Api.addRoute('status', {
+  get() {
+    if (this.queryParams.format == 'plain') {
+      this.response.write('running');
+      this.done();
+    } else {
+      return { status: 'running' };
+    }
+  }
+});
