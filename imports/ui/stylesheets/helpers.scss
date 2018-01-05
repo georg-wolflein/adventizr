@@ -13,3 +13,11 @@
 .btn-outline-advent {
   @include button-outline-variant($btn-advent-bg);
 }
+
+.btn-accent {
+  @include button-variant($btn-accent-bg, $btn-accent-border);
+}
+
+.btn-outline-accent {
+  @include button-outline-variant($btn-accent-bg);
+}
