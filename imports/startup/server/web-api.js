@@ -10,12 +10,9 @@ var Api = new Restivus({
 });
 
 var calendarFields = {
-  _id: 1,
-  title: 1,
-  description: 1,
-  user: 1,
-  created: 1,
-  updated: 1
+  width: 0,
+  height: 0,
+  doors: 0
 };
 
 Api.addRoute('calendars', {

@@ -2,7 +2,7 @@ import { FilesCollection } from 'meteor/ostrio:files';
 import { Calendars } from '/imports/api/calendars/calendars.js';
 
 export const CalendarFiles = new FilesCollection({
-  collectionName: 'CalendarFiles',
+  collectionName: 'calendar-files',
   allowClientCode: false, // Disallow remove files from client
   storagePath(file) {
     var path = Meteor.settings.public.CALENDAR_FILES_PATH;

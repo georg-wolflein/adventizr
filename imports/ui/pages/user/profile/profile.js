@@ -12,6 +12,9 @@ Template.user_profile.onCreated(() => {
 
 Template.user_profile.helpers({
   mycalendars() {
-    return Calendars.find({ user: Meteor.userId() }, { sort: { updated: -1 } });
+    return Calendars.find(
+      { user: Meteor.userId() },
+      { sort: { updated: -1 } }
+    ).fetch();
   }
 });

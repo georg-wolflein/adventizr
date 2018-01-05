@@ -15,9 +15,10 @@ Meteor.methods({
       user: Meteor.userId(),
       created: new Date(),
       updated: new Date(),
-      // default width, height and doors
+      // default width, height, background, and doors
       width: 400,
       height: 400,
+      background: null,
       doors: generateCalendarDoors()
     });
   },

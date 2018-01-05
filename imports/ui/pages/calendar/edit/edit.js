@@ -19,11 +19,8 @@ Template.calendar_edit.onCreated(function() {
 
 Template.calendar_edit.onRendered(function() {
   this.autorun(() => {
-    let id = FlowRouter.getParam('_id'),
-      cal = Calendars.findOne(id);
-    if (cal && cal.background && CalendarFiles.findOne(cal.background))
-      cal.backgroundImage = CalendarFiles.findOne(cal.background).link();
-    calendar.set(cal);
+    let id = FlowRouter.getParam('_id');
+    calendar.set(Calendars.findOne(id));
   });
   interact('.resize-drag')
     .draggable({
