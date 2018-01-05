@@ -7,9 +7,9 @@ meteor run --settings settings-production.json
 ```
 
 ## Web API
-The web API is at `/api/v1/`. It currently supports the following operations:
+The web API is at `/api/v1`. It currently supports the following operations:
 
-| Method | Path | Description |
+| Method | Endpoint | Description |
 |--|--|--|
 | `GET` | `/status` | Returns the current status of the API. The query parameter `?format=plain` will use plain text instead of JSON. |
 | `GET` | `/calendars` | Get a list of all calendars. |
