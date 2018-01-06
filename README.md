@@ -3,7 +3,7 @@ A digital cloud-based advent calendar for everyone.
 
 ## Running
 ```
-meteor run --settings settings-production.json
+ROOT_URL=http://{host}:{port}/ meteor run --settings settings-production.json
 ```
 
 ## Web API
